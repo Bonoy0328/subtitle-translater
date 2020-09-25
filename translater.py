@@ -7,8 +7,8 @@ import json
 import time
 import os
 
-appid = '20200905000559291'  # 填写你的appid
-secretKey = 'QMpKcb6iGbNeVfYX8gvp'  # 填写你的密钥
+appid = '***************'  # 填写你的appid
+secretKey = '*****************'  # 填写你的密钥
 QPS = 1 #填写你的QPS
 
 #打开当前目录下所有srt文件
