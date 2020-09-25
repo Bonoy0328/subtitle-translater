@@ -8,8 +8,8 @@ import time
 import os
 
 appid = '***************'  # 填写你的appid
-secretKey = '*****************'  # 填写你的密钥
-QPS = 1 #填写你的QPS
+secretKey = '****************'  # 填写你的密钥
+# QPS = 1 #填写你的QPS
 
 #打开当前目录下所有srt文件
 srtFile = []
@@ -41,26 +41,31 @@ for j in range(fileCount):
         sign = hashlib.md5(sign.encode()).hexdigest()
         myurl = myurl + '?appid=' + appid + '&q=' + urllib.parse.quote(q) + '&from=' + fromLang + '&to=' + toLang + '&salt=' + str(
         salt) + '&sign=' + sign
+        while True:
+            try:
+                httpClient = http.client.HTTPConnection('api.fanyi.baidu.com')
+                httpClient.request('GET', myurl)
 
-        try:
-            httpClient = http.client.HTTPConnection('api.fanyi.baidu.com')
-            httpClient.request('GET', myurl)
+                # response是HTTPResponse对象
+                response = httpClient.getresponse()
+                result_all = response.read().decode("utf-8")
+                result = json.loads(result_all)
 
-            # response是HTTPResponse对象
-            response = httpClient.getresponse()
-            result_all = response.read().decode("utf-8")
-            result = json.loads(result_all)
-
-            # print(q)
-            # print (result["trans_result"][0]["dst"].replace("搅拌机","Blender"))
-            trsResult.append(result["trans_result"][0]["dst"].replace("搅拌机","Blender"))
-
-        except Exception as e:
-            print (e)
-        finally:
-            if httpClient:
-                httpClient.close()
-        time.sleep(1/QPS + 0.2)
+                # print(q)
+                # print (result["trans_result"][0]["dst"].replace("搅拌机","Blender"))
+                trsResult.append(result["trans_result"][0]["dst"].replace("搅拌机","Blender"))
+                if (len(result)==3):
+                    break
+            except Exception as e:
+                if (len(result)==3):
+                    break
+                print (e)
+            finally:
+                if (len(result)==3):
+                    break
+                if httpClient:
+                    httpClient.close()
+            time.sleep(0.1)
         tipStr = "正在翻译第" + str(j+1) + "/" + str(fileCount+1) + "个文件的第" + str(i+1) + "/" + str(trsCount + 1) + "句话"
         os.system("cls")
         print(tipStr)
