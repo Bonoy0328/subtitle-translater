@@ -53,8 +53,8 @@ for j in range(fileCount):
 
                 # print(q)
                 # print (result["trans_result"][0]["dst"].replace("搅拌机","Blender"))
-                trsResult.append(result["trans_result"][0]["dst"].replace("搅拌机","Blender"))
                 if (len(result)==3):
+                    trsResult.append(result["trans_result"][0]["dst"].replace("搅拌机","Blender"))
                     break
             except Exception as e:
                 if (len(result)==3):
