@@ -5,5 +5,5 @@
 ![](images/image2.PNG)<br>
 运行结果如图<br>
 ![](images/image.PNG)<br>
-注意三个地方：APIID secretKey QPS，这些可以从百度翻译开放平台自己获取，免费的QPS是1，如果太快会请求失败，脚本没有加入请求失败的处理方法，所以一定保证QPS正确。<br>
+注意两个地方：APIID secretKey，这些可以从百度翻译开放平台自己获取。<br>
 使用愉快<br>
